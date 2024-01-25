@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# Printing "Best School" Using While Loop.
+
+i=0
+while [ $i -lt 9 ];
+do
+	echo "Best School"
+	((i++))
+done
