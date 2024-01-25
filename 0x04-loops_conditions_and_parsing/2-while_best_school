@@ -2,7 +2,7 @@
 # Printing "Best School" Using While Loop.
 
 i=0
-while [ $i -lt 9 ];
+while [ $i -le 9 ];
 do
 	echo "Best School"
 	((i++))
