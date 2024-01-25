@@ -2,11 +2,11 @@
 # Printing "Best School" 10 times but on some condition.
 
 i=0
-while [ $i -le 10 ];
+while [ $i -lt 10 ];
 do
 
 	echo "Best School"
-	if [ $i -eq 9 ];
+	if [ $i -eq 8 ];
 	then
 		echo "hi"
 	fi
