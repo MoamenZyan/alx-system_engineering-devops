@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# Listing 3 lines
+# shellcheck disable=SC2009
+
+ps aux | grep bash
