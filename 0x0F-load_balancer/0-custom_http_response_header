@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+# configures a brand new Ubuntu machine to the requirements
+
+sudo apt-get update -y -qq && sudo apt-get install -y nginx -qq
+
+sudo ufw allow 'Nginx HTTP'
+
+if [ -d "/var/www" ]; then
+    sudo chown -R "$USER":"$USER" /var/www
+    sudo chmod -R 755 /var/www
+else
+    sudo mkdir -p /var/www
+    sudo chown -R "$USER":"$USER" /var/www
+    sudo chmod -R 755 /var/www
+fi
+
+echo "Hello World!" > /var/www/html/index.html
+echo "Ceci n'est pas une page" > /var/www/html/error_404.html
+
+configs=\
+"server {
+		listen 80 default_server;
+		listen [::]:80 default_server;
+		root /var/www/html;
+		index index.html index.htm index.nginx-debian.html
+		server_name_;
+		add_header X-Served-By \$hostname;
+		location / {
+			try_files \$uri \$uri/ =404;
+		}
+		error_page 404 /error_404.html;
+		location = /error_404.html {
+			internal;
+		}
+}"
+
+echo "$configs" | sudo dd status=none of=/etc/nginx/sites-enabled/default
+
+if [ "$(pgrep -c nginx)" -le 0 ]; then
+    sudo service nginx start
+else
+    sudo service nginx restart
+fi
