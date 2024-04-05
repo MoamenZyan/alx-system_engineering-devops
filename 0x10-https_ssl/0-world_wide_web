@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-
 # print all domains
 
 print_domain_subdomain () {
