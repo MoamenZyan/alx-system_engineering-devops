@@ -1,12 +1,12 @@
 #!/usr/bin/python3
-"""My Script"""
+"""My Script."""
 
 from sys import argv
 import requests
 
 
 def top_ten(subreddit):
-    """docs"""
+    """docs."""
     user = {'User-Agent': 'Lizzie'}
     url = requests.get('https://www.reddit.com/r/{}/hot/.json?limit=10'
                        .format(subreddit), headers=user).json()
