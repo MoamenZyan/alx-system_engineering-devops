@@ -6,13 +6,12 @@ import requests
 
 def number_of_subscribers(subreddit):
     """docs."""
-    import requests
-
-    sub_info = requests.get("https://www.reddit.com/r/{}/about.json"
-                            .format(subreddit),
-                            headers={"User-Agent": "My-User-Agent"},
-                            allow_redirects=False)
-    if sub_info.status_code >= 300:
+    myheader = {"User-Agent": "Mozilla/5.0"}
+    url = "https://www.reddit.com/r/{}/about.json".format(subreddit)
+    res = requests.get(url, myheaders=myheader, allow_redirects=False)
+    if res.status_code == 200:
+        data = res.json()
+        subscribers = data['data']['subscribers']
+        return subscribers
+    else:
         return 0
-
-    return sub_info.json().get("data").get("subscribers")
